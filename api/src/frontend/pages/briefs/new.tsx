@@ -76,6 +76,7 @@ export const NewBrief = (props: BriefProps): JSX.Element => {
             <div className="name-panel-input-wrapper">
                 <input
                     className="field-input"
+                    data-testid="headline-input"
                     placeholder="Enter the name of your project"
                     name="headline"
                     value={headline}
@@ -325,6 +326,7 @@ export const NewBrief = (props: BriefProps): JSX.Element => {
                     ) : (
                         <button
                             className="primary-btn in-dark w-button"
+                            data-testid="next-button"
                             onClick={() => setStep(step + 1)}
                             disabled={!validate()}
                         >

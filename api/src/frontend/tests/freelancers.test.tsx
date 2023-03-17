@@ -1,7 +1,6 @@
 import { Freelancers } from "../pages/freelancer/new";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import React from "react";
-import { Simulate } from "react-dom/test-utils";
 
 test("test Freelancer rendering", () => {
     const user = { "id": 1, "username": "test", "display_name": "test", "password": "test", "web3Accounts": [], "getstream_token": "test" };
