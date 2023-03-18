@@ -100,6 +100,7 @@ export const NewBrief = (props: BriefProps): JSX.Element => {
             <div className="industry-container">
                 <TagsInput
                     suggestData={suggestedIndustries}
+                    data-testid="industries-input"
                     tags={industries}
                     onChange={(tags: string[]) => setIndustries(tags)}
                 />
@@ -340,6 +341,7 @@ export const NewBrief = (props: BriefProps): JSX.Element => {
         </div>
     );
 };
+
 
 document.addEventListener("DOMContentLoaded", async (event) => {
     ReactDOMClient.createRoot(document.getElementById("brief-details")!).render(
