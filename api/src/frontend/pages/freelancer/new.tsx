@@ -58,6 +58,7 @@ export const Freelancers = ({ user: user }: FreelancerProps): JSX.Element => {
                 {freelancedBefore.map(({ label, value }, index) => (
                     <div
                         key={index}
+                        data-testid={`freelance-xp-${index}`}
                         className={`freelance-xp-item ${
                             freelancingBefore === value ? "active" : ""
                         }`}
@@ -81,6 +82,7 @@ export const Freelancers = ({ user: user }: FreelancerProps): JSX.Element => {
                 {freelancingGoal.map(({ label, value }, index) => (
                     <div
                         key={index}
+                        data-testid={`freelance-goal-${index}`}
                         className={`freelance-xp-item ${
                             goal === value ? "active" : ""
                         }`}

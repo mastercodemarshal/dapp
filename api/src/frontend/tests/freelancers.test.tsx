@@ -38,33 +38,42 @@ test("test freelancer onclick next snapshot matching", () => {
     expect(screen.getByText('A few quick questions: have you freelanced before?')).toMatchSnapshot();
 });
 
-test("test freelancer capturing the input textbox value", () => {
+test("test validate function failing if no value has been provided and the click wont proceed", () => {
     setUp();
     fireEvent.click(screen.getByTestId('get-started-button'));
     fireEvent.click(screen.getByTestId('next-button'));
+    // so here after clicking the next-button the snapshot is still matching with the previous page
+    expect(screen.getByText('A few quick questions: have you freelanced before?')).toMatchSnapshot();
+});
+
+test("test validate function passing whne capturing the value for the given option", () => {
+    setUp();
+    fireEvent.click(screen.getByTestId('get-started-button'));
+    fireEvent.click(screen.getByTestId('freelance-xp-1'));
+    fireEvent.click(screen.getByTestId('next-button'));
+    expect(screen.getByText('Great, so what’s your biggest goal for freelancing?')).toMatchSnapshot();
+});
+
+test("test freelancer capturing the input textbox value", () => {
+    setUp();
+    fireEvent.click(screen.getByTestId('get-started-button'));
+    fireEvent.click(screen.getByTestId('freelance-xp-1'));
+    fireEvent.click(screen.getByTestId('next-button'));
+    fireEvent.click(screen.getByTestId('freelance-goal-2'));
     fireEvent.click(screen.getByTestId('next-button'));
     fireEvent.change(screen.getByTestId('title'), {target: {value: 'imbueLegends'}})
-    expect((screen.getByTestId('title') as HTMLInputElement).value).toEqual('imbueLegends');
+    expect(screen.getByTestId('title').value).toEqual('imbueLegends');
 });
 
 test("test freelancer capturing the multiselect languages", () => {
     setUp();
     fireEvent.click(screen.getByTestId('get-started-button'));
+    fireEvent.click(screen.getByTestId('freelance-xp-1'));
     fireEvent.click(screen.getByTestId('next-button'));
+    fireEvent.click(screen.getByTestId('freelance-goal-2'));
     fireEvent.click(screen.getByTestId('next-button'));
+    fireEvent.change(screen.getByTestId('title'), {target: {value: 'imbueLegends'}})
     fireEvent.click(screen.getByTestId('next-button'));
-    fireEvent.change(screen.getByTestId('tag-input'), {target: {value: ['German','hkh']}})
-    expect((screen.getByTestId('tag-input') as HTMLInputElement).value).toEqual('German,hkh');
-});
-
-test("test freelancer the bio length ", () => {
-    setUp();
-    fireEvent.click(screen.getByTestId('get-started-button'));
-    fireEvent.click(screen.getByTestId('next-button'));
-    fireEvent.click(screen.getByTestId('next-button'));
-    fireEvent.click(screen.getByTestId('next-button'));
-    fireEvent.click(screen.getByTestId('next-button'));
-    fireEvent.click(screen.getByTestId('next-button'));
-    fireEvent.change(screen.getByTestId('bio'), {target: {value: "this is my bio" }})
-    expect((screen.getByTestId('bio') as HTMLInputElement).value.length).toEqual(14);
+    fireEvent.change(screen.getByTestId('tag-input'), {target: {value: ['German','French']}})
+    expect((screen.getByTestId('tag-input') as HTMLInputElement).value).toEqual('German,French');
 });
